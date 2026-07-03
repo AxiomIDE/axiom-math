@@ -1,0 +1,7 @@
+name: christian/axiom-math
+version: 0.1.0
+language: python
+nodes:
+    - name: Calculate
+      input: MathRequest
+      output: MathResult

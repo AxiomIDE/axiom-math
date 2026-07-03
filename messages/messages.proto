@@ -1,0 +1,46 @@
+// This file defines the data contracts (messages) for your Axiom package.
+// Every node's --input and --output refers to a message defined here.
+//
+// Run `axiom create message <Name>` to scaffold a new message below.
+// Run `axiom generate` to compile these definitions into language bindings in gen/.
+//
+// DOCUMENTATION
+//   Comments written directly above a message or field declaration are extracted
+//   automatically at publish time and shown in the Axiom registry as documentation.
+//   Write your descriptions there — no separate doc files needed.
+//
+//   Leading comment  (no blank line before the declaration) → registry description ✓
+//   Detached comment (blank line before the declaration)    → ignored by registry  ✗
+//
+// This file is yours to edit. Axiom only appends new message blocks — it never
+// overwrites or removes content you have written.
+
+syntax = "proto3";
+
+package christian.axiom_math;
+
+// A request to perform a binary arithmetic operation on two operands.
+// `operation` selects the operator; `a` and `b` are the operands.
+message MathRequest {
+  // The operation to perform. One of:
+  //   "add" · "subtract" · "multiply" · "divide" · "power" · "modulo"
+  // Case-insensitive; common aliases (+, -, *, x, /, ^, %, mod) are also accepted.
+  string operation = 1;
+  // The left-hand operand.
+  double a = 2;
+  // The right-hand operand.
+  double b = 3;
+}
+
+// The outcome of a MathRequest.
+// On success `error` is empty and `value` holds the result.
+// On failure (e.g. unknown operation or divide-by-zero) `error` describes the
+// problem and `value` is 0.
+message MathResult {
+  // The numeric result of the operation (0 when `error` is set).
+  double value = 1;
+  // Empty on success; a human-readable message on failure.
+  string error = 2;
+  // Echo of the normalised operation that was applied (e.g. "divide").
+  string operation = 3;
+}
